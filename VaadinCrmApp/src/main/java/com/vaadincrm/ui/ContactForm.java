@@ -67,7 +67,7 @@ public class ContactForm extends FormLayout {
 
 
         save.addClickListener(event->validateAndSave());
-        delete.addClickListener(event->fireEvent(new DeleteEvent(this,binder.getBean())));
+        delete.addClickListener(event->fireEvent(new DeleteEvent(this,contact)));
         close.addClickListener(event->fireEvent(new CloseEvent(this)));
 
         binder.addStatusChangeListener(event->save.setEnabled(binder.isValid()));
@@ -79,7 +79,7 @@ public class ContactForm extends FormLayout {
 
         try {
             binder.writeBean(contact);
-            fireEvent(new SaveEvent(this,binder.getBean()));
+            fireEvent(new SaveEvent(this,contact));
         } catch (ValidationException e) {
             e.printStackTrace();
         }
